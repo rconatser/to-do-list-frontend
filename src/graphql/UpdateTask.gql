@@ -1,0 +1,14 @@
+mutation UpdateTask ($id: String!, $title: String!, $content: String, $dueDate: String, $tags: String, $user: String) {
+  updateTask (where:
+    { id: $id},
+    data: { 
+    title: $title,
+    content: $content,
+    dueDate: $dueDate,
+    tags: $tags,
+    user: $user
+    }
+  ) {
+      id
+  }
+}
