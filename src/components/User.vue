@@ -54,7 +54,7 @@ export default {
       content: this.$store.getters.tasks.content,
       dueDate: this.$store.getters.tasks.dueDate,
       tags: this.$store.getters.tasks.tags,
-      user: this.$store.getters.users.name,
+      createdBy: this.$store.getters.tasks.createdBy,
     }
   },
   methods: {

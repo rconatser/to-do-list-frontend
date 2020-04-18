@@ -1,10 +1,10 @@
-query AllTasks ($searchString: String) {
+query tasks ($searchString: String) {
   tasks (searchString: $searchString) {
     id
     title
     content
     dueDate
     tags
-    user
+    createdBy
   }
 }
