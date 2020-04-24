@@ -1,48 +1,27 @@
 <template>
-  <v-app>
-    <v-app-bar
-      app
-      dark
-    >
-    <v-spacer></v-spacer>
-    <div>
-        <router-link class="routerLink" to="/">Home</router-link>
-        <router-link class="routerLink" to="/users">Users</router-link>
-        <router-link class="routerLink" to="/tasks">Tasks</router-link>
-      </div>
-    <v-spacer></v-spacer>
-    </v-app-bar>
-
-    <v-content>
-      <router-view/>
-    </v-content>
-  </v-app>
+  <div id="app">
+    <div id="nav">
+      <v-container>
+			<router-link to="/">Home</router-link>
+			<router-link to="/tasks">Tasks</router-link>
+			<router-link to="/users">Users</router-link>
+      </v-container>
+    </div>
+    <router-view/>
+  </div>
 </template>
 
-<script>
-//import ApolloExample from './components/ApolloExample';
-
-export default {
-  name: 'App',
-
-  components: {
-    //ApolloExample,
-    //User
-  },
-
-  data: () => ({
-    //
-  }),
-};
-</script>
-
-<style scoped>
+<style>
 #app {
-  font-family: 'Roboto', Helvetica, Arial, sans-serif;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 400;
 }
-.routerLink {
-  color: #fff;
-  font-size: 1.5rem;
-  text-decoration: none;
+
+#nav {
+	font-family: 'Roboto', sans-serif;
+	font-weight: 700;
+
+	display: flex;
+	justify-content: space-evenly;
 }
 </style>
