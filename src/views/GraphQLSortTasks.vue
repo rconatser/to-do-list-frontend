@@ -1,35 +1,15 @@
 <template>
 	<v-container class="pb-12">
 		<v-row>
-			<v-container>
-				<h1 class="text-center mt-8">Today's Tasks...</h1>
-				<h2 class="text-center">GraphQL API</h2>
+			<v-container class="text-center">
+				<h1 class="text-center mt-8">Sorting Tasks by "{{ filter }}: {{ searchString }}"</h1>
+				<v-btn to="/graphql-tasks" class="mt-4">Go Back</v-btn>
 			</v-container>
-		</v-row>
-
-		<v-row class="crud-cards">
-			<v-col cols="12" sm="6" lg="4">
-				<v-card class="pa-6 align-center d-flex flex-column" height="100%">
-					<h2 class="d-block text-center mb-4 mb-md-8 grey--text">Thought of something to add?</h2>
-					<v-btn color="blue" class="white--text justify-end" to='/graphql-add'>Add Task</v-btn>
-				</v-card>
-			</v-col>
-			<v-col cols="12" sm="6" lg="4">
-				<v-card class="pa-6 align-center d-flex flex-column" height="100%">
-					<v-select :items="tagz" label="Tags*" v-model="tagName"></v-select>
-					<v-btn color="blue" class="white--text justify-end" @click="sortByTags(tagName)">Sort by Tag Name</v-btn>
-				</v-card>
-			</v-col>
-			<v-col cols="12" sm="6" lg="4">
-				<v-card class="pa-6 align-center d-flex flex-column" height="100%">
-					<v-select :items="priorities" label="Priority*" v-model="priorityVal"></v-select>
-					<v-btn color="blue" class="white--text justify-end" @click="sortByPriority(priorityVal)">Sort by Priority</v-btn>
-				</v-card>
-			</v-col>
 		</v-row>
 
 		<ApolloQuery
 			:query="require('../graphql/AllTasks.gql')"
+			:variables="{ searchString }"
 			fetchPolicy="no-cache"
 		>
 			<template slot-scope="{ result: { loading, error, data } }">
@@ -39,8 +19,17 @@
 				<!-- Error -->
 				<div v-else-if="error" class="error apollo">An error occurred</div>
 
+				<!-- No result -->
+				<div v-else-if="data.Tasks.length === 0" class="no-result apollo">
+					<v-card class="d-flex align-center justify-center pa-6" elevation="9" color="orange lighten-4 mt-8">
+						<h2 class="text-center">There is are no tasks by that {{ filter }}.</h2>
+					</v-card>
+				</div>
+
+				
+
 				<!-- Result -->
-				<div v-else-if="data" class="result apollo">
+				<div v-else-if="data.Tasks.length > 1" class="result apollo">
 					<v-row>
 						<v-simple-table
 						fixed-header
@@ -71,63 +60,45 @@
 									</td>
 								</tr>
 							</tbody>
+
+							
 						</v-simple-table>
+						
 					</v-row>
 				</div>
 
-				<!-- No result -->
-				<div v-else class="no-result apollo">No result :(</div>
+				
 			</template>
 		</ApolloQuery>
 	</v-container>
-
 </template>
 
 <script>
 export default {
-	name: 'GraphQLTasks.vue',
-	data: () => ({
-		dialog: false,
-		task: {},
-		tagName: '',
-		priorityVal: '',
-
-		tagz: [
-			'Home',
-			'School',
-			'Homework',
-			'Work',
-			'Chores',
-			'Groceries',
-			'General',
-			'Other'
-		],
-		priorities: [
-			'Low',
-			'Medium',
-			'High'
-		]
-	}),
-
-	computed: {
-		sendTask() {
-			return (this.task);
-		},
+	name: 'GraphQLSortTasks.vue',
+	data() {
+		return {
+			searchString: this.$route.params.string,
+			filter: this.$route.params.filter,
+			task: {},
+		}
 	},
-	
 	methods: {
 		editTask(task) {
 			this.$store.dispatch('editTask', task);
 			this.$router.push(`/graphql-edit/${task.id}`);
 		},
-		sortByTags(tagName){
-			return this.$router.push('/graphql-sort/Tag/' + tagName)
-		},
-		sortByPriority(priority){
-			return this.$router.push('/graphql-sort/Priority/' + priority)
-		},
-		goHome() {
-			return this.$router.push('/graphql-tasks')
+		returnHome() {
+			this.$router.push('/graphql-tasks');
+		}
+	},
+	beforeMount() {
+		console.log('FILTER: ' +this.filter);
+		console.log('TAG: ' +this.searchString);
+		if(this.filter === 'Tag'){
+			this.task.tags = this.searchString;
+		} else if (this.filter === 'Priority') {
+			this.task.priority = this.searchString;
 		}
 	}
 };
@@ -152,14 +123,9 @@ export default {
 }
 
 @media only screen and (min-width: 768px) {
-.table, .crud-cards {
+.table {
 	width: 70%;
 	margin: 20px 15%;
 }
 }
-
-@media only screen and (min-width: 996px) {
-	
-}
-
 </style>

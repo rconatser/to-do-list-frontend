@@ -1,11 +1,11 @@
 query singleTask($id: String) {
 	Task(id: $id) {
-		id,
-		title,
-		content,
-		dueDate,
-		priority,
-		tags,
+		id
+		title
+		content
+		dueDate
+		priority
+		tags
 		createdBy
 	}
 }

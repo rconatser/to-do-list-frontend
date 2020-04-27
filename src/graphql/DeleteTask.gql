@@ -2,5 +2,10 @@ mutation deleteTask($id: String!) {
     deleteOneTask(where: { id: $id }) {
         id
     	title
+		content
+		dueDate
+		priority
+		tags
+		createdBy
     }
 }

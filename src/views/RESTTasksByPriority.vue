@@ -19,7 +19,7 @@
 					<th class="text-center">Due Date</th>
 					<th class="text-center">Tags</th>
 					<th class="text-center">Priority</th>
-					<th class="text-center">Edit</th>
+					<th class="text-center">Edit/Delete</th>
 				</thead>
 
 				<tbody>

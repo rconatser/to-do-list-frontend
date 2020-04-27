@@ -1,8 +1,0 @@
-query singleUser($id: String) {
-	User(id: $id) {
-		id,
-		name,
-		email,
-		lives
-	}
-}

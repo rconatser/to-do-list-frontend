@@ -1,17 +1,18 @@
-mutation updateTask($id: String!, $title: String, $content: String, $dueDate: String, $tags: String, $createdBy: String!) {
-    updateOneTask(where:
-    { id: $id },
-        data: {
+mutation updateTask($id: String!, $title: String, $content: String, $dueDate: String, $priority: String, $tags: String, $createdBy: String!) {
+    updateOneTask( data: {
             title: $title
             content: $content
             dueDate: $dueDate
+			priority: $priority
             tags: $tags
             createdBy: $createdBy
-        }
+        } where: { id: $id },   
     ) {
-        id,
-		title,
-		dueDate,
+        id
+		title
+		dueDate
+		priority
+		tags
 		createdBy
     }
 }

@@ -1,7 +1,12 @@
 <template>
 	<v-container class="pb-12">
 		<v-row class="mb-8">
-			<h1 class="mx-auto mt-8">Today's Tasks...</h1>
+			<v-row>
+				<v-container>
+					<h1 class="text-center mt-8">Today's Tasks...</h1>
+					<h2 class="text-center">RESTful API - It will take a while to load</h2>
+				</v-container>
+			</v-row>
 			
 			<template>
 				<v-container>
@@ -80,7 +85,7 @@
 					<th class="text-center">Due Date</th>
 					<th class="text-center">Tags</th>
 					<th class="text-center">Priority</th>
-					<th class="text-center">Edit</th>
+					<th class="text-center">Edit/Delete</th>
 				</thead>
 
 				<tbody>
