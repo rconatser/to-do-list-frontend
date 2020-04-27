@@ -1,4 +1,4 @@
-# peter-beard-final-frontend
+# To Do List Final RIA2 Project - Frontend
 
 ## Project setup
 ```
@@ -19,6 +19,3 @@ npm run build
 ```
 npm run lint
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).

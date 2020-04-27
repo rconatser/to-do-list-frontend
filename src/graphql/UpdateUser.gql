@@ -1,0 +1,15 @@
+mutation updateUser($id: String!, $name: String, $email: String, $lives: String) {
+    updateOneUser(where:
+    { id: $id },
+        data: {
+            name: $name
+            email: $email
+            lives: $lives
+        }
+    ) {
+        id,
+		name,
+		email,
+		lives
+    }
+}

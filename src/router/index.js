@@ -1,8 +1,12 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-import TaskList from '../views/TaskList.vue'
-import UserList from '../views/UserList.vue'
+import GraphQLTasks from '../views/GraphQLTasks.vue'
+import GraphQLUsers from '../views/GraphQLUsers.vue'
+import RESTTasks from '../views/RESTTasks.vue'
+import RESTEditTask from '../views/RESTEditTask.vue'
+import RESTTasksByTags from '../views/RESTTasksByTags.vue'
+import RESTTasksByPriority from '../views/RESTTasksByPriority.vue'
 
 Vue.use(VueRouter)
 
@@ -13,14 +17,34 @@ Vue.use(VueRouter)
     component: Home
   },
   {
-    path: '/tasks',
-    name: 'Tasks',
-    component: TaskList
+    path: '/graphql-tasks',
+    name: 'GraphQL Tasks',
+    component: GraphQLTasks
   },
   {
-    path: '/users',
-    name: 'Users',
-    component: UserList
+    path: '/graphql-users',
+    name: 'GraphQL Users',
+    component: GraphQLUsers
+  },
+  {
+    path: '/rest-tasks',
+    name: 'REST Tasks',
+    component: RESTTasks
+  },
+  {
+	path: '/rest-edit-task/:id',
+	name: 'Edit Task',
+	component: RESTEditTask
+  },
+  {
+	path: '/by-tag/:tag',
+	name: 'Sort By Tag',
+	component: RESTTasksByTags
+  },
+  {
+	path: '/by-priority/:priority',
+	name: 'Sort By Priority',
+	component: RESTTasksByPriority
   }
 ]
 

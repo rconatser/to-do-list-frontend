@@ -1,0 +1,11 @@
+query allTasks($searchString: String) {
+	Tasks(searchString: $searchString) {
+		id,
+		title,
+		content,
+		dueDate,
+		priority,
+		tags,
+		createdBy
+	}
+}
