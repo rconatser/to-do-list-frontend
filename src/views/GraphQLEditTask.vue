@@ -22,42 +22,44 @@
 						<v-row>
 							<v-col>
 								<v-card class="edit-task">
-								<v-card-title>
-									<span class="headline">Edit a Task</span>
-								</v-card-title>
-								<v-card-text>
-									<v-container>
-										<v-row>
-											<v-col cols="12" sm="6" md="4">
-												<v-text-field cols="col-xs-12 col-sm-6" v-model="title" label="Title*"></v-text-field>
-											</v-col>
-											<v-col cols="12" sm="6" md="4">
-												<v-text-field cols="col-xs-12 col-sm-6" class="text--primary" v-model="content" label="Description*"></v-text-field>
-											</v-col>
-											<v-col cols="12" sm="6" md="4">
-												<v-text-field v-model="dueDate" label="Due Date*"></v-text-field>
-											</v-col>
-										</v-row>
-										<v-row>
-											<v-col cols="12" sm="6" md="4">
-												<v-select :items="priorities" label="Priority*" v-model="priority"></v-select>
-											</v-col>
-											<v-col cols="12" sm="6" md="4">
-												<v-select :items="tagz" label="Tags*" v-model="tags"></v-select>
-											</v-col>
-											<v-col cols="12" sm="6" md="4">
-												<v-text-field v-model="createdBy" label="Created By*"></v-text-field>
-											</v-col>
-										</v-row>
-									</v-container>
-									<small>* indicates required field</small>
-								</v-card-text>
-								<v-card-actions>
-									<v-spacer></v-spacer>
-									<v-btn color="grey darken-1" text @click="goHome">Cancel</v-btn>
-									<v-btn color="blue darken-1" text @click="mutate()">Edit Task</v-btn>
-									<v-btn color="red darken-1" text @click="deleteTask">Delete Task</v-btn>
-								</v-card-actions>
+								<v-form @submit.prevent="mutate()">
+									<v-card-title>
+										<span class="headline">Edit a Task</span>
+									</v-card-title>
+									<v-card-text>
+										<v-container>
+											<v-row>
+												<v-col cols="12" sm="6" md="4">
+													<v-text-field cols="col-xs-12 col-sm-6" v-model="title" label="Title*"></v-text-field>
+												</v-col>
+												<v-col cols="12" sm="6" md="4">
+													<v-text-field cols="col-xs-12 col-sm-6" class="text--primary" v-model="content" label="Description*"></v-text-field>
+												</v-col>
+												<v-col cols="12" sm="6" md="4">
+													<v-text-field v-model="dueDate" label="Due Date*"></v-text-field>
+												</v-col>
+											</v-row>
+											<v-row>
+												<v-col cols="12" sm="6" md="4">
+													<v-select :items="priorities" label="Priority*" v-model="priority"></v-select>
+												</v-col>
+												<v-col cols="12" sm="6" md="4">
+													<v-select :items="tagz" label="Tags*" v-model="tags"></v-select>
+												</v-col>
+												<v-col cols="12" sm="6" md="4">
+													<v-text-field v-model="createdBy" label="Created By*"></v-text-field>
+												</v-col>
+											</v-row>
+										</v-container>
+										<small>* indicates required field</small>
+									</v-card-text>
+									<v-card-actions>
+										<v-spacer></v-spacer>
+										<v-btn color="grey darken-1" text @click="goHome">Cancel</v-btn>
+										<v-btn color="blue darken-1" text type="submit">Edit Task</v-btn>
+										<v-btn color="red darken-1" text @click="deleteTask">Delete Task</v-btn>
+									</v-card-actions>
+								</v-form>
 								</v-card>
 							</v-col>
 						</v-row>
@@ -97,7 +99,7 @@ export default {
 				'Low',
 				'Medium',
 				'High'
-			],
+			]
 		}
 	},
 	methods: {

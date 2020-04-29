@@ -16,14 +16,18 @@
 			</v-col>
 			<v-col cols="12" sm="6" lg="4">
 				<v-card class="pa-6 align-center d-flex flex-column" height="100%">
-					<v-select :items="tagz" label="Tags*" v-model="tagName"></v-select>
-					<v-btn color="blue" class="white--text justify-end" @click="sortByTags(tagName)">Sort by Tag Name</v-btn>
+					<v-form @submit.prevent="sortByTags(tagName)">
+						<v-select :items="tagz" label="Tags*" v-model="tagName" :rules="[rules.required]"></v-select>
+						<v-btn color="blue" class="white--text justify-end" type="submit">Sort by Tag Name</v-btn>
+					</v-form>
 				</v-card>
 			</v-col>
 			<v-col cols="12" sm="6" lg="4">
 				<v-card class="pa-6 align-center d-flex flex-column" height="100%">
-					<v-select :items="priorities" label="Priority*" v-model="priorityVal"></v-select>
-					<v-btn color="blue" class="white--text justify-end" @click="sortByPriority(priorityVal)">Sort by Priority</v-btn>
+					<v-form @submit.prevent="sortByPriority(priorityVal)">
+						<v-select :items="priorities" label="Priority*" v-model="priorityVal" :rules="[rules.required]"></v-select>
+						<v-btn color="blue" class="white--text justify-end" type="submit">Sort by Priority</v-btn>
+					</v-form>
 				</v-card>
 			</v-col>
 		</v-row>
@@ -116,7 +120,10 @@ export default {
 			'Low',
 			'Medium',
 			'High'
-		]
+		],
+		rules: {
+			required: value => !!value || 'Required input.',
+		}
 	}),
 
 	computed: {
