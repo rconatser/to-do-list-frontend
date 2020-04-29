@@ -114,7 +114,6 @@
 export default {
 	name: 'RESTTasks.vue',
 	data: () => ({
-		url: 'https://powerful-oasis-42318.herokuapp.com',
 		addTaskDialog: false,
 
 		tasks: [],
@@ -142,7 +141,7 @@ export default {
 		}
 	}),
 	created() {
-		fetch('/tasks', { method: 'GET' })
+		fetch('https://powerful-oasis-42318.herokuapp.com/tasks', { method: 'GET' })
 			.then((response) => {
 				return response.json();
 			})
@@ -162,7 +161,7 @@ export default {
 				priority: this.tasks.priority,
 				tags: this.tasks.tags
 			};
-			fetch('/create', {
+			fetch('https://powerful-oasis-42318.herokuapp.com/create', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json;charset=utf-8',
@@ -176,7 +175,7 @@ export default {
 				this.addTaskDialog = false;
 			})
 			.then(() => {
-				fetch('/tasks', { method: 'GET' })
+				fetch('https://powerful-oasis-42318.herokuapp.com/tasks', { method: 'GET' })
 					.then((response) => {
 						return response.json();
 					})
