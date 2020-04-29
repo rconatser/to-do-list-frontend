@@ -66,7 +66,7 @@ export default {
 		}
 	},
 	created() {
-		fetch(`/bytag?tags=${this.tagName}`)
+		fetch(`https://powerful-oasis-42318.herokuapp.com/bytag?tags=${this.tagName}`)
 			.then((response) => {
 				return response.json();
 			})

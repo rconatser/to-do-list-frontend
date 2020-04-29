@@ -54,7 +54,7 @@ export default {
 		
 	},
 	created() {
-		fetch(`/bypriority?priority=${this.priorityVal}`)
+		fetch(`https://powerful-oasis-42318.herokuapp.com/bypriority?priority=${this.priorityVal}`)
 			.then((response) => {
 				return response.json();
 			})

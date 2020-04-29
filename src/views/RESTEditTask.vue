@@ -67,7 +67,7 @@ export default {
 	},
 	methods: {
 		updateTask() {
-			fetch(('/update/'+ this.taskId), {
+			fetch(('https://powerful-oasis-42318.herokuapp.com/update/'+ this.taskId), {
 				method: 'PUT',
 				headers: {
 					'Content-Type': 'application/json;charset=utf-8',
@@ -92,7 +92,7 @@ export default {
 			})
 		},
 		deleteTask() {
-			fetch(('/delete/'+ this.taskId), 
+			fetch(('https://powerful-oasis-42318.herokuapp.com/delete/'+ this.taskId), 
 			{ 
 				method: 'DELETE',
 				headers: {
@@ -114,7 +114,7 @@ export default {
 		}
 	},
 	beforeMount() {
-		fetch(`/task/${this.taskId}`)
+		fetch(`https://powerful-oasis-42318.herokuapp.com/task/${this.taskId}`)
 			.then((response) => {
 				return response.json();
 			})
