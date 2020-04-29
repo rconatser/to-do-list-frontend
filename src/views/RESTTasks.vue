@@ -26,21 +26,21 @@
 										<v-container>
 											<v-row>
 												<v-col cols="12" md="6">
-													<v-text-field cols="col-xs-12 col-sm-6" v-model="task.title" label="Title*" :rules="[rules.required]"></v-text-field>
+													<v-text-field cols="col-xs-12 col-sm-6" v-model="newTask.title" label="Title*" :rules="[rules.required]"></v-text-field>
 												</v-col>
 												<v-col cols="12" md="6">
-													<v-text-field cols="col-xs-12 col-sm-6" v-model="task.content" label="Description*" :rules="[rules.required]"></v-text-field>
+													<v-text-field cols="col-xs-12 col-sm-6" v-model="newTask.content" label="Description*" :rules="[rules.required]"></v-text-field>
 												</v-col>
 											</v-row>
 											<v-row>
 												<v-col cols="12" sm="6" md="4">
-													<v-text-field v-model="task.dueDate" label="Due Date*" :rules="[rules.required]"></v-text-field>
+													<v-text-field v-model="newTask.dueDate" label="Due Date*" :rules="[rules.required]"></v-text-field>
 												</v-col>
 												<v-col cols="12" sm="6" md="4">
-													<v-select :items="priorities" label="Priority*" v-model="task.priority" :rules="[rules.required]"></v-select>
+													<v-select :items="priorities" label="Priority*" v-model="newTask.priority" :rules="[rules.required]"></v-select>
 												</v-col>
 												<v-col cols="12" sm="6" md="4">
-													<v-select :items="tagz" label="Tags*" v-model="task.tags" :rules="[rules.required]"></v-select>
+													<v-select :items="tagz" label="Tags*" v-model="newTask.tags" :rules="[rules.required]"></v-select>
 												</v-col>
 											</v-row>
 										</v-container>
@@ -116,7 +116,7 @@ export default {
 	name: 'RESTTasks.vue',
 	data: () => ({
 		addTaskDialog: false,
-		task: [],
+		newTask: [],
 		tasks: [],
 		tagName: '',
 		priorityVal: '',
@@ -144,7 +144,8 @@ export default {
 	created() {
 		axios.get('https://powerful-oasis-42318.herokuapp.com/tasks')
 		.then((response) => {
-			this.tasks = response;
+			this.tasks = response.data;
+			console.log(response.data);
 		})
 		.catch((err) => {
 			return console.error(err);
@@ -154,17 +155,18 @@ export default {
 		addTask() {
 			axios.post('https://powerful-oasis-42318.herokuapp.com/create', {
 				body: {
-					title: this.task.title,
-					content: this.task.content,
-					dueDate: this.task.dueDate,
-					priority: this.task.priority,
-					tags: this.task.tags,
+					title: this.newTask.title,
+					content: this.newTask.content,
+					dueDate: this.newTask.dueDate,
+					priority: this.newTask.priority,
+					tags: this.newTask.tags,
 				}
 			})
 			.then((response) => {
 				axios.get('https://powerful-oasis-42318.herokuapp.com/tasks')
 				.then((response) => {
 					this.tasks = response.data;
+					console.log(response.data);
 				})
 			})
 			.then(() => {
