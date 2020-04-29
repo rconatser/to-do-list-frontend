@@ -9,21 +9,21 @@
 					<v-container>
 						<v-row>
 							<v-col cols="12" md="6">
-								<v-text-field cols="col-xs-12 col-sm-6" v-model="task.title" label="Title*"></v-text-field>
+								<v-text-field cols="col-xs-12 col-sm-6" v-model="tasks.title" label="Title*"></v-text-field>
 							</v-col>
 							<v-col cols="12" md="6">
-								<v-text-field cols="col-xs-12 col-sm-6" class="text--primary" v-model="task.content" label="Description*"></v-text-field>
+								<v-text-field cols="col-xs-12 col-sm-6" class="text--primary" v-model="tasks.content" label="Description*"></v-text-field>
 							</v-col>
 						</v-row>
 						<v-row>
 							<v-col cols="12" sm="6" md="4">
-								<v-text-field v-model="task.dueDate" label="Due Date*"></v-text-field>
+								<v-text-field v-model="tasks.dueDate" label="Due Date*"></v-text-field>
 							</v-col>
 							<v-col cols="12" sm="6" md="4">
-								<v-select :items="priorities" label="Priority*" v-model="task.priority"></v-select>
+								<v-select :items="priorities" label="Priority*" v-model="tasks.priority"></v-select>
 							</v-col>
 							<v-col cols="12" sm="6" md="4">
-								<v-select :items="tags" label="Tags*" v-model="task.tags"></v-select>
+								<v-select :items="tags" label="Tags*" v-model="tasks.tags"></v-select>
 							</v-col>
 						</v-row>
 					</v-container>
@@ -48,7 +48,6 @@ export default {
 		return {
 			taskId: this.$route.params.id,
 			tasks: [],
-			task: [],
 
 			tags: [
 				'Home',
@@ -70,11 +69,12 @@ export default {
 	methods: {
 		updateTask() {
 			axios.put('https://powerful-oasis-42318.herokuapp.com/update/'+ this.taskId, {
-				title: this.task.title,
-				content: this.task.content,
-				dueDate: this.task.dueDate,
-				priority: this.task.priority,
-				tags: this.task.tags
+				id: this.taskId,
+				title: this.tasks.title,
+				content: this.tasks.content,
+				dueDate: this.tasks.dueDate,
+				priority: this.tasks.priority,
+				tags: this.tasks.tags
 			})
 			.then((response) => {
 				this.tasks = response.data;

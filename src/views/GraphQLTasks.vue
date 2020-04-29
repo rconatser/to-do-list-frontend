@@ -34,7 +34,13 @@
 		>
 			<template slot-scope="{ result: { loading, error, data } }">
 				<!-- Loading -->
-				<div v-if="loading" class="loading apollo">Loading...</div>
+				<div v-if="loading" class="loading apollo">
+					<v-progress-circular
+					indeterminate
+					color="blue"
+					class="loading-btn"
+					></v-progress-circular>
+				</div>
 
 				<!-- Error -->
 				<div v-else-if="error" class="error apollo">An error occurred</div>
@@ -153,6 +159,13 @@ export default {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+}
+
+.loading-btn {
+	display: block;
+	position: absolute;
+	left: 48%;
+	padding-top: 80px;
 }
 
 @media only screen and (min-width: 768px) {
