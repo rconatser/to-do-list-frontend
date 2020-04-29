@@ -47,16 +47,6 @@
 							</v-list-item-content>
 						</v-list-item>
 					</router-link>
-					<router-link class="routerLink" to="/graphql-users">
-						<v-list-item link>
-							<v-list-item-icon class="mr-4">
-								<v-icon>mdi-account-circle</v-icon>
-							</v-list-item-icon>
-							<v-list-item-content>
-								<v-list-item-title>Users (GraphQL)</v-list-item-title>
-							</v-list-item-content>
-						</v-list-item>
-					</router-link>
 				</v-list-item-group>
 			</v-list>
 		</v-navigation-drawer>

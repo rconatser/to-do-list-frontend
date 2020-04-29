@@ -87,17 +87,22 @@
 					<th class="text-center">Priority</th>
 					<th class="text-center">Edit/Delete</th>
 				</thead>
-
 				<tbody>
-					<tr v-for="task in tasks" :key="task._id">
-						<td>{{ task.title }}</td>
-						<td>{{ task.content }}</td>
-						<td>{{ task.dueDate }}</td>
-						<td>{{ task.tags }}</td>
-						<td>{{ task.priority }}</td>
-						<td class="action-btns">
-							<v-btn class="mr-3" icon :to="'/rest-edit-task/' + task._id"><v-icon>mdi-pencil-outline</v-icon></v-btn>
-						</td>
+					<div v-if="tasks.length === 0" class="loading-btn">
+						<v-progress-circular
+						indeterminate
+						color="blue"
+						></v-progress-circular>
+					</div>
+					<tr v-else v-for="task in tasks" :key="task._id">
+					<td>{{ task.title }}</td>
+					<td>{{ task.content }}</td>
+					<td>{{ task.dueDate }}</td>
+					<td>{{ task.tags }}</td>
+					<td>{{ task.priority }}</td>
+					<td class="action-btns">
+						<v-btn class="mr-3" icon :to="'/rest-edit-task/' + task._id"><v-icon>mdi-pencil-outline</v-icon></v-btn>
+					</td>
 					</tr>
 				</tbody>
 			</v-simple-table>
@@ -214,6 +219,13 @@ export default {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+}
+
+.loading-btn {
+	display: block;
+	position: absolute;
+	left: 48%;
+	padding-top: 80px;
 }
 
 @media only screen and (min-width: 768px) {

@@ -27,7 +27,7 @@
 				<v-col cols="12" sm="6" md="4">
 					<v-card hover="elevation-9" to="/graphql-tasks">
 						<v-img src="https://cdn-images-1.medium.com/max/750/1*XK-d3dgy4uvykEtXmON06A.png" alt="To do list image" class="ma-0 pa-0" height="300px" />
-						<h2 class="px-6 py-8 text-center">Manipulate Tasks using a REST Api</h2>
+						<h2 class="px-6 py-8 text-center">Manipulate Tasks using a GraphQL Api</h2>
 						<v-content class="mt-0 py-6 px-6 pt-0">
 							<ul class="ul-checkmark">
 								<li>CREATE a meaningful (at least 5 data fields) resource through a GraphQL endpoint that is stored in the datastore</li>

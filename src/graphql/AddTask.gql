@@ -1,4 +1,4 @@
-mutation addTask($title: String!, $content: String, $dueDate: String, $priority: String, $tags: String, $createdBy: String!) {
+mutation addTask($title: String!, $content: String!, $dueDate: String!, $priority: String!, $tags: String!, $createdBy: String!) {
     createOneTask(
         data: {
             title: $title
