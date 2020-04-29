@@ -153,7 +153,13 @@ export default {
 	},
 	methods: {
 		addTask() {
-			axios.post('https://powerful-oasis-42318.herokuapp.com/create', this.newTask)
+			axios.post('https://powerful-oasis-42318.herokuapp.com/create', {
+				title = this.newTask.title;
+				content = this.newTask.content;
+				dueDate = this.newTask.dueDate;
+				priority = this.newTask.priority;
+				tags = this.newTask.tags;
+			})
 			.then(() => {
 				this.addTaskDialog = false;
 			})
