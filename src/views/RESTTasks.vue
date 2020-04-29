@@ -19,58 +19,54 @@
 										<v-btn color="blue" dark v-on="on">Add Task</v-btn>
 									</template>
 									<v-card>
-										<v-form @submit.prevent="addTask">
-											<v-card-title>
-											<span class="headline">Add Task</span>
-											</v-card-title>
-											<v-card-text>
-											<v-container>
-												<v-row>
-													<v-col cols="12" md="6">
-														<v-text-field cols="col-xs-12 col-sm-6" v-model="newTask.title" label="Title*" :rules="[rules.required]"></v-text-field>
-													</v-col>
-													<v-col cols="12" md="6">
-														<v-text-field cols="col-xs-12 col-sm-6" v-model="newTask.content" label="Description*" :rules="[rules.required]"></v-text-field>
-													</v-col>
-												</v-row>
-												<v-row>
-													<v-col cols="12" sm="6" md="4">
-														<v-text-field v-model="newTask.dueDate" label="Due Date*" :rules="[rules.required]"></v-text-field>
-													</v-col>
-													<v-col cols="12" sm="6" md="4">
-														<v-select :items="priorities" label="Priority*" v-model="newTask.priority" :rules="[rules.required]"></v-select>
-													</v-col>
-													<v-col cols="12" sm="6" md="4">
-														<v-select :items="tagz" label="Tags*" v-model="newTask.tags" :rules="[rules.required]"></v-select>
-													</v-col>
-												</v-row>
-											</v-container>
-											<small>* indicates required field</small>
-											</v-card-text>
-											<v-card-actions>
-											<v-spacer></v-spacer>
-											<v-btn color="blue" text @click="addTaskDialog = false">Close</v-btn>
-											<v-btn color="blue" texttype="submit">Add Task</v-btn>
-											</v-card-actions>
-										</v-form>
+										<v-card-title>
+										<span class="headline">Add Task</span>
+										</v-card-title>
+										<v-card-text>
+										<v-container>
+											<v-row>
+												<v-col cols="12" md="6">
+													<v-text-field cols="col-xs-12 col-sm-6" v-model="newTask.title" label="Title*" :rules="[rules.required]"></v-text-field>
+												</v-col>
+												<v-col cols="12" md="6">
+													<v-text-field cols="col-xs-12 col-sm-6" v-model="newTask.content" label="Description*" :rules="[rules.required]"></v-text-field>
+												</v-col>
+											</v-row>
+											<v-row>
+												<v-col cols="12" sm="6" md="4">
+													<v-text-field v-model="newTask.dueDate" label="Due Date*" :rules="[rules.required]"></v-text-field>
+												</v-col>
+												<v-col cols="12" sm="6" md="4">
+													<v-select :items="priorities" label="Priority*" v-model="newTask.priority" :rules="[rules.required]"></v-select>
+												</v-col>
+												<v-col cols="12" sm="6" md="4">
+													<v-select :items="tagz" label="Tags*" v-model="newTask.tags" :rules="[rules.required]"></v-select>
+												</v-col>
+											</v-row>
+										</v-container>
+										<small>* indicates required field</small>
+										</v-card-text>
+										<v-card-actions>
+										<v-spacer></v-spacer>
+										<v-btn color="blue" text @click="addTaskDialog = false">Close</v-btn>
+										<v-btn color="blue" text @click="addTask">Add Task</v-btn>
+										</v-card-actions>
 									</v-card>
 								</v-dialog>
 							</v-card>
 						</v-col>
 						<v-col cols="12" sm="6" lg="4">
 							<v-card class="pa-6 align-center d-flex flex-column" height="100%">
-								<v-form @submit.prevent="sortByTags(tagName)">
-									<v-select :items="tagz" label="Tags*" v-model="tagName" :rules="[rules.required]"></v-select>
-									<v-btn color="blue" class="white--text justify-end" type="submit">Sort by Tag Name</v-btn>
-								</v-form>
+									<v-select :items="tagz" label="Tags*" v-model="tagName"></v-select>
+									<p class="grey--text" :v-if="this.formErrorTag != ''">{{ formErrorTag }}</p>
+									<v-btn color="blue" class="white--text justify-end" @click="sortByTags(tagName)">Sort by Tag Name</v-btn>
 							</v-card>
 						</v-col>
 						<v-col cols="12" sm="6" lg="4">
 							<v-card class="pa-6 align-center d-flex flex-column" height="100%">
-								<v-form @submit.prevent="sortByPriority(priorityVal)">
-									<v-select :items="priorities" label="Priority*" v-model="priorityVal" :rules="[rules.required]"></v-select>
-									<v-btn color="blue" class="white--text justify-end" type="submit">Sort by Priority</v-btn>
-								</v-form>
+									<v-select :items="priorities" label="Priority*" v-model="priorityVal"></v-select>
+									<p class="grey--text" :v-if="this.formErrorPriority != ''">{{ formErrorPriority }}</p>
+									<v-btn color="blue" class="white--text justify-end" @click="sortByPriority(priorityVal)">Sort by Priority</v-btn>
 							</v-card>
 						</v-col>
 					</v-row>
@@ -126,6 +122,8 @@ export default {
 		tasks: [],
 		tagName: '',
 		priorityVal: '',
+		formErrorTag: '',
+		formErrorPriority: '',
 
 		tagz: [
 			'Home',
@@ -182,11 +180,21 @@ export default {
 		},
 		sortByTags(tagName) {
 			tagName = this.tagName;
-			return this.$router.push('/by-tag/' + tagName);
+			if(tagName != '') {
+				this.formErrorTag = '';
+				return this.$router.push('/by-tag/' + tagName);
+			} else if (tagName === ''){
+				this.formErrorTag = 'Must select an option before continuing';
+			}
 		},
 		sortByPriority(priorityVal) {
 			priorityVal = this.priorityVal;
-			return this.$router.push('/by-priority/' + priorityVal);
+			if(priorityVal != '') {
+				this.formErrorPriority = '';
+				return this.$router.push('/by-priority/' + priorityVal);
+			} else if (priorityVal === ''){
+				this.formErrorPriority = 'Must select an option before continuing';
+			}
 		},
 	},
 };

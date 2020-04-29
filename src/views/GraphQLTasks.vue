@@ -16,18 +16,16 @@
 			</v-col>
 			<v-col cols="12" sm="6" lg="4">
 				<v-card class="pa-6 align-center d-flex flex-column" height="100%">
-					<v-form @submit.prevent="sortByTags(tagName)">
-						<v-select :items="tagz" label="Tags*" v-model="tagName" :rules="[rules.required]"></v-select>
-						<v-btn color="blue" class="white--text justify-end" type="submit">Sort by Tag Name</v-btn>
-					</v-form>
+					<v-select :items="tagz" label="Tags*" v-model="tagName"></v-select>
+					<p class="grey--text" :v-if="this.formErrorTag != ''">{{ formErrorTag }}</p>
+					<v-btn color="blue" class="white--text justify-end" @click="sortByTags(tagName)">Sort by Tag Name</v-btn>
 				</v-card>
 			</v-col>
 			<v-col cols="12" sm="6" lg="4">
 				<v-card class="pa-6 align-center d-flex flex-column" height="100%">
-					<v-form @submit.prevent="sortByPriority(priorityVal)">
-						<v-select :items="priorities" label="Priority*" v-model="priorityVal" :rules="[rules.required]"></v-select>
-						<v-btn color="blue" class="white--text justify-end" type="submit">Sort by Priority</v-btn>
-					</v-form>
+					<v-select :items="priorities" label="Priority*" v-model="priorityVal"></v-select>
+					<p class="grey--text" :v-if="this.formErrorPriority != ''">{{ formErrorPriority }}</p>
+					<v-btn color="blue" class="white--text justify-end" @click="sortByPriority(priorityVal)">Sort by Priority</v-btn>
 				</v-card>
 			</v-col>
 		</v-row>
@@ -105,6 +103,8 @@ export default {
 		task: {},
 		tagName: '',
 		priorityVal: '',
+		formErrorTag: '',
+		formErrorPriority: '',
 
 		tagz: [
 			'Home',
@@ -137,11 +137,23 @@ export default {
 			this.$store.dispatch('editTask', task);
 			this.$router.push(`/graphql-edit/${task.id}`);
 		},
-		sortByTags(tagName){
-			return this.$router.push('/graphql-sort/Tag/' + tagName)
+		sortByTags(tagName) {
+			tagName = this.tagName;
+			if(tagName != '') {
+				this.formErrorTag = '';
+				return this.$router.push('/graphql-sort/Tag/' + tagName)
+			} else if (tagName === ''){
+				this.formErrorTag = 'Must select an option before continuing';
+			}
 		},
-		sortByPriority(priority){
-			return this.$router.push('/graphql-sort/Priority/' + priority)
+		sortByPriority(priorityVal) {
+			priorityVal = this.priorityVal;
+			if(priorityVal != '') {
+				this.formErrorPriority = '';
+				return this.$router.push('/graphql-sort/Priority/' + priorityVal)
+			} else if (priorityVal === ''){
+				this.formErrorPriority = 'Must select an option before continuing';
+			}
 		},
 		goHome() {
 			return this.$router.push('/graphql-tasks')
