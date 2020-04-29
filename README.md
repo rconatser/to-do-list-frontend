@@ -3,14 +3,14 @@
 
 ## About the project & Where to find everything
 
-[x] "This criterion is linked to a Learning OutcomeConditional logic and array methods render large lists"
+- [x] "This criterion is linked to a Learning OutcomeConditional logic and array methods render large lists"
 ..* This can be found in [RESTful Tasks view](https://github.com/rconatser/to-do-list-frontend/blob/master/src/views/RESTTasks.vue "View on GitHub"), [RESTful Tasks Sorting by Tag Name](https://github.com/rconatser/to-do-list-frontend/blob/master/src/views/RESTTasksByTags.vue "View on GitHub"), [RESTful Tasks Sorting by Priority](https://github.com/rconatser/to-do-list-frontend/blob/master/src/views/RESTTasksByPriority.vue "View on GitHub"), and within the [GraphQL main page](https://github.com/rconatser/to-do-list-frontend/blob/master/src/views/GraphQLTasks.vue "View on GitHub"), as well as the [GraphQL Sorting view](https://github.com/rconatser/to-do-list-frontend/blob/master/src/views/GraphQLSortTasks.vue "View on GitHub")
-[x] "This criterion is linked to a Learning Outcome, Front-end developed and functional"
+- [x] "This criterion is linked to a Learning Outcome, Front-end developed and functional"
 ..* This can be found anywhere throughout the site or repository.
-[x] "This criterion is linked to a Learning OutcomeRESTful server properly CREATES, READS, UPDATES, and DELETES"
+- [x] "This criterion is linked to a Learning OutcomeRESTful server properly CREATES, READS, UPDATES, and DELETES"
 ..* 'READS', and 'CREATES' can be found in the [RESTful Tasks view](https://github.com/rconatser/to-do-list-frontend/blob/master/src/views/RESTTasks.vue "View on GitHub")
 ..* 'UPDATES' and 'DELETES' can be found in the [RESTful Edit Tasks View](https://github.com/rconatser/to-do-list-frontend/blob/master/src/views/RESTEditTask.vue "View on GitHub")
-[x] "GraphQL server properly CREATES, READS, UPDATES, and DELETES"
+- [x] "GraphQL server properly CREATES, READS, UPDATES, and DELETES"
 ..* 'READS' can be found on the [GraphQL main page](https://github.com/rconatser/to-do-list-frontend/blob/master/src/views/GraphQLTasks.vue "View on GitHub")
 ..* 'UPDATES' and 'DELETES' can be found in the [GraphQL Edit Task View](https://github.com/rconatser/to-do-list-frontend/blob/master/src/views/GraphQLEditTask.vue "View on GitHub")
 ..* 'CREATES' can be found in the [GraphQL Add Task View](https://github.com/rconatser/to-do-list-frontend/blob/master/src/views/GraphQLAddTask.vue "View on GitHub")
