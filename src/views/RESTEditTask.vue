@@ -97,6 +97,7 @@ export default {
 		axios.get(`https://powerful-oasis-42318.herokuapp.com/task/${this.taskId}`)
 		.then((response) => {
 			this.tasks = response.data;
+			console.log(this.taskId);
 		})
 		.catch((err) => {
 			console.error(err);

@@ -76,7 +76,11 @@
 				</div>
 
 				<!-- No result -->
-				<div v-else class="no-result apollo">No result :(</div>
+				<div v-else-if="data.Tasks.length === 0" class="no-result apollo">
+					<v-card class="d-flex align-center justify-center pa-6" elevation="9" color="orange lighten-4 mt-8">
+						<h2 class="text-center">There is are no tasks by that {{ filter }}.</h2>
+					</v-card>
+				</div>
 			</template>
 		</ApolloQuery>
 	</v-container>
