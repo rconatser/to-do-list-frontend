@@ -69,16 +69,7 @@ export default {
 	},
 	methods: {
 		updateTask() {
-			axios.put('https://powerful-oasis-42318.herokuapp.com/update/'+ this.taskId, {
-				body: {
-					id: this.taskId,
-					title: this.task.title,
-					content: this.task.content,
-					dueDate: this.task.dueDate,
-					priority: this.task.priority,
-					tags: this.task.tags,
-				}
-			})
+			axios.put('https://powerful-oasis-42318.herokuapp.com/update/'+ this.taskId, this.task)
 			.then((response) => {
 				this.tasks = response.data;
 			})
@@ -90,11 +81,7 @@ export default {
 			})
 		},
 		deleteTask() {
-			axios.delete('https://powerful-oasis-42318.herokuapp.com/delete/'+ this.taskId, {
-				body: {
-					id: this.taskId
-				}
-			})
+			axios.delete('https://powerful-oasis-42318.herokuapp.com/delete/'+ this.taskId, this.taskId)
 			.then(() => {
 				this.goHome()
 			})

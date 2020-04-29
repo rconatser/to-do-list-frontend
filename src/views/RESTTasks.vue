@@ -153,14 +153,9 @@ export default {
 	},
 	methods: {
 		addTask() {
-			axios.post('https://powerful-oasis-42318.herokuapp.com/create', {
-				body: {
-					title: this.newTask.title,
-					content: this.newTask.content,
-					dueDate: this.newTask.dueDate,
-					priority: this.newTask.priority,
-					tags: this.newTask.tags,
-				}
+			axios.post('https://powerful-oasis-42318.herokuapp.com/create', this.newTask)
+			.then(() => {
+				this.addTaskDialog = false;
 			})
 			.then((response) => {
 				axios.get('https://powerful-oasis-42318.herokuapp.com/tasks')
@@ -168,9 +163,6 @@ export default {
 					this.tasks = response.data;
 					console.log(response.data);
 				})
-			})
-			.then(() => {
-				this.addTaskDialog = false;
 			})
 			.catch((err) => {
 				return console.error(err);
