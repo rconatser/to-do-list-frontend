@@ -101,7 +101,7 @@
 					<td>{{ task.tags }}</td>
 					<td>{{ task.priority }}</td>
 					<td class="action-btns">
-						<v-btn class="mr-3" icon :to="'/rest-edit-task/' + task._id"><v-icon>mdi-pencil-outline</v-icon></v-btn>
+						<v-btn class="mr-3" icon :to="'https://to-do-list-ria2.netlify.app/rest-edit-task/' + task._id"><v-icon>mdi-pencil-outline</v-icon></v-btn>
 					</td>
 					</tr>
 				</tbody>
@@ -176,11 +176,11 @@ export default {
 		},
 		sortByTags(tagName) {
 			tagName = this.tagName;
-			return this.$router.push('/by-tag/' + tagName);
+			return this.$router.push('https://to-do-list-ria2.netlify.app/by-tag/' + tagName);
 		},
 		sortByPriority(priorityVal) {
 			priorityVal = this.priorityVal;
-			return this.$router.push('/by-priority/' + priorityVal);
+			return this.$router.push('https://to-do-list-ria2.netlify.app/by-priority/' + priorityVal);
 		},
 	},
 };

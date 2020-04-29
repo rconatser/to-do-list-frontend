@@ -3,7 +3,7 @@
 		<v-row class="mb-8 pa-12 d-block">
 			<h1>Showing tasks under "{{ tagName }}"...</h1>
 			<h2 v-if="tasks.length === 0">There are no tasks to display</h2>
-			<v-btn to="/rest-tasks" class="mt-5 white--text" color="blue">Go Back</v-btn>
+			<v-btn to="https://to-do-list-ria2.netlify.app/rest-tasks" class="mt-5 white--text" color="blue">Go Back</v-btn>
 		</v-row>	
 		
 		<v-row>
@@ -30,7 +30,7 @@
 						<td>{{ task.tags }}</td>
 						<td>{{ task.priority }}</td>
 						<td class="action-btns">
-							<v-btn class="mr-3" icon :to="'/rest-edit-task/' + task._id"><v-icon>mdi-pencil-outline</v-icon></v-btn>
+							<v-btn class="mr-3" icon :to="'https://to-do-list-ria2.netlify.app/rest-edit-task/' + task._id"><v-icon>mdi-pencil-outline</v-icon></v-btn>
 						</td>
 					</tr>
 				</tbody>
