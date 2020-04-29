@@ -59,6 +59,12 @@ export default {
 		.then((response) => {
 			this.tasks = response.data;
 		})
+		.catch((err) => {
+			console.error(err);
+		})
+		.catch((err) => {
+			return console.error(err);
+		})
 	},
 };
 </script>

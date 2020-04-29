@@ -58,12 +58,18 @@ export default {
 			.then((response) => {
 				this.tasks = response.data;
 			})
+			.catch((err) => {
+				return console.error(err);
+			})
 		}
 	},
 	created() {
 		axios.get(`https://powerful-oasis-42318.herokuapp.com/bytag?tags=${this.tagName}`)
 		.then((response) => {
 			this.tasks = response.data;
+		})
+		.catch((err) => {
+			return console.error(err);
 		})
 	},
 };

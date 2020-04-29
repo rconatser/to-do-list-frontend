@@ -85,6 +85,9 @@ export default {
 			.then(() => {
 				this.goHome()
 			})
+			.catch((err) => {
+				return console.error(err);
+			})
 		},
 		deleteTask() {
 			axios.delete('https://powerful-oasis-42318.herokuapp.com/delete/'+ this.taskId, {
@@ -95,6 +98,9 @@ export default {
 			.then(() => {
 				this.goHome()
 			})
+			.catch((err) => {
+				return console.error(err);
+			})
 		},
 		goHome() {
 			return this.$router.push('/rest-tasks')
@@ -104,6 +110,9 @@ export default {
 		axios.get(`https://powerful-oasis-42318.herokuapp.com/task/${this.taskId}`)
 		.then((response) => {
 			this.tasks = response.data;
+		})
+		.catch((err) => {
+			console.error(err);
 		})
 	},
 

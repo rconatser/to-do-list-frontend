@@ -144,14 +144,16 @@ export default {
 	created() {
 		axios.get('https://powerful-oasis-42318.herokuapp.com/tasks')
 		.then((response) => {
-			this.tasks = response.data;
+			this.tasks = response;
+		})
+		.catch((err) => {
+			return console.error(err);
 		})
 	},
 	methods: {
 		addTask() {
 			axios.post('https://powerful-oasis-42318.herokuapp.com/create', {
 				body: {
-					taskId: this.taskId,
 					title: this.task.title,
 					content: this.task.content,
 					dueDate: this.task.dueDate,
@@ -164,6 +166,12 @@ export default {
 				.then((response) => {
 					this.tasks = response.data;
 				})
+			})
+			.then(() => {
+				this.addTaskDialog = false;
+			})
+			.catch((err) => {
+				return console.error(err);
 			})
 		},
 		sortByTags(tagName) {
