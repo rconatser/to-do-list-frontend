@@ -70,11 +70,11 @@ export default {
 	methods: {
 		updateTask() {
 			axios.put('https://powerful-oasis-42318.herokuapp.com/update/'+ this.taskId, {
-				title = this.task.title,
-				content = this.task.content,
-				dueDate = this.task.dueDate,
-				priority = this.task.priority,
-				tags = this.task.tags
+				title: this.task.title,
+				content: this.task.content,
+				dueDate: this.task.dueDate,
+				priority: this.task.priority,
+				tags: this.task.tags
 			})
 			.then((response) => {
 				this.tasks = response.data;
