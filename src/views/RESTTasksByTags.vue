@@ -42,6 +42,7 @@
 
 
 <script>
+import axios from 'axios';
 export default {
 	name: 'RESTTasksByTags.vue',
 	data() {
@@ -53,29 +54,17 @@ export default {
 	methods: {
 		getTasksByTag() {
 			console.log(this.tagName);
-			fetch('/bytag?tags=' + this.tagName)
-				.then((response) => {
-					return response.json();
-				})
-				.then((data) => {
-					this.tasks = data;
-				})
-				.catch((error) => {
-					console.error('Error getting task from api', error);
-				});
+			axios.get(`https://powerful-oasis-42318.herokuapp.com/bytag?tags=${this.tagName}`)
+			.then((response) => {
+				this.tasks = response.data;
+			})
 		}
 	},
 	created() {
-		fetch(`https://powerful-oasis-42318.herokuapp.com/bytag?tags=${this.tagName}`)
-			.then((response) => {
-				return response.json();
-			})
-			.then((data) => {
-				this.tasks = data;
-			})
-			.catch((error) => {
-				console.error('Error getting task from api', error);
-			});
+		axios.get(`https://powerful-oasis-42318.herokuapp.com/bytag?tags=${this.tagName}`)
+		.then((response) => {
+			this.tasks = response.data;
+		})
 	},
 };
 </script>

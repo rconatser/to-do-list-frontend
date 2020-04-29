@@ -26,21 +26,21 @@
 										<v-container>
 											<v-row>
 												<v-col cols="12" md="6">
-													<v-text-field cols="col-xs-12 col-sm-6" v-model="tasks.title" label="Title*" :rules="[rules.required]"></v-text-field>
+													<v-text-field cols="col-xs-12 col-sm-6" v-model="task.title" label="Title*" :rules="[rules.required]"></v-text-field>
 												</v-col>
 												<v-col cols="12" md="6">
-													<v-text-field cols="col-xs-12 col-sm-6" v-model="tasks.content" label="Description*" :rules="[rules.required]"></v-text-field>
+													<v-text-field cols="col-xs-12 col-sm-6" v-model="task.content" label="Description*" :rules="[rules.required]"></v-text-field>
 												</v-col>
 											</v-row>
 											<v-row>
 												<v-col cols="12" sm="6" md="4">
-													<v-text-field v-model="tasks.dueDate" label="Due Date*" :rules="[rules.required]"></v-text-field>
+													<v-text-field v-model="task.dueDate" label="Due Date*" :rules="[rules.required]"></v-text-field>
 												</v-col>
 												<v-col cols="12" sm="6" md="4">
-													<v-select :items="priorities" label="Priority*" v-model="tasks.priority" :rules="[rules.required]"></v-select>
+													<v-select :items="priorities" label="Priority*" v-model="task.priority" :rules="[rules.required]"></v-select>
 												</v-col>
 												<v-col cols="12" sm="6" md="4">
-													<v-select :items="tagz" label="Tags*" v-model="tasks.tags" :rules="[rules.required]"></v-select>
+													<v-select :items="tagz" label="Tags*" v-model="task.tags" :rules="[rules.required]"></v-select>
 												</v-col>
 											</v-row>
 										</v-container>
@@ -111,11 +111,12 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
 	name: 'RESTTasks.vue',
 	data: () => ({
 		addTaskDialog: false,
-
+		task: [],
 		tasks: [],
 		tagName: '',
 		priorityVal: '',
@@ -141,53 +142,28 @@ export default {
 		}
 	}),
 	created() {
-		fetch('https://powerful-oasis-42318.herokuapp.com/tasks', { method: 'GET' })
-			.then((response) => {
-				return response.json();
-			})
-			.then((data) => {
-				this.tasks = data;
-			})
-			.catch((error) => {
-				return console.error(error);
-			})
+		axios.get('https://powerful-oasis-42318.herokuapp.com/tasks')
+		.then((response) => {
+			this.tasks = response.data;
+		})
 	},
 	methods: {
 		addTask() {
-			const payload = {
-				title: this.tasks.title,
-				content: this.tasks.content,
-				dueDate: this.tasks.dueDate,
-				priority: this.tasks.priority,
-				tags: this.tasks.tags
-			};
-			fetch('https://powerful-oasis-42318.herokuapp.com/create', {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json;charset=utf-8',
-				},
-				body: JSON.stringify(payload),
+			axios.post('https://powerful-oasis-42318.herokuapp.com/create', {
+				body: {
+					taskId: this.taskId,
+					title: this.task.title,
+					content: this.task.content,
+					dueDate: this.task.dueDate,
+					priority: this.task.priority,
+					tags: this.task.tags,
+				}
 			})
-			.then((data) => {
-				this.tasks = data;
-			})
-			.then(() => {
-				this.addTaskDialog = false;
-			})
-			.then(() => {
-				fetch('https://powerful-oasis-42318.herokuapp.com/tasks', { method: 'GET' })
-					.then((response) => {
-						return response.json();
-					})
-					.then((data) => {
-						this.tasks = data;
-					})
-					.catch((error) => {
-						return console.error(error);
-					})
-			})
-			.catch((error) => {
-				return console.error(error);
+			.then((response) => {
+				axios.get('https://powerful-oasis-42318.herokuapp.com/tasks')
+				.then((response) => {
+					this.tasks = response.data;
+				})
 			})
 		},
 		sortByTags(tagName) {
