@@ -9,7 +9,8 @@ Vue.use(VueApollo)
 const AUTH_TOKEN = 'apollo-token'
 
 // Http endpoint
-const httpEndpoint = process.env.VUE_APP_GRAPHQL_HTTP || 'http://localhost:4000/graphql'
+const httpEndpoint = process.env.VUE_APP_GRAPHQL_HTTP || 'https://to-do-list-graphql-ria2.herokuapp.com/'
+// If using locally, change endpoint in quotes to http://localhost:4000/graphql
 
 // Config
 const defaultOptions = {
