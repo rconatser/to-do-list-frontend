@@ -15,12 +15,12 @@ const httpEndpoint = process.env.VUE_APP_GRAPHQL_HTTP || 'https://to-do-list-gra
 // Config
 const defaultOptions = {
   httpEndpoint,
-  wsEndpoint: process.env.VUE_APP_GRAPHQL_WS || 'https://to-do-list-graphql-ria2.herokuapp.com/',
+  wsEndpoint: process.env.VUE_APP_GRAPHQL_WS || 'ws://localhost:4000/graphql',
   tokenName: AUTH_TOKEN,
   persisting: false,
   websocketsOnly: false,
   ssr: false,
-} // If using locally, change endpoint in quotes to http://localhost:4000/graphql
+}
 
 // Call this in the Vue app file
 export function createProvider (options = {}) {
